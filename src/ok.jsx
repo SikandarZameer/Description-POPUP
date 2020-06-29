@@ -44,72 +44,69 @@ export default class Demo1 extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           fullWidth="true"
+          maxWidth="sm"
           aria-labelledby="draggable-dialog-title"
         >
-          <div style={{ width: 600, height: 350 }}>
-            <Grid
-              container
-              direction="column"
-              wrap="no-wrap"
-              justify="center"
-              alignItems="center"
-            >
-              <Grid item xs={12}>
-                <CheckCircleOutlineIcon
-                  style={{
-                    width: 200,
-                    height: 200
-                  }}
-                />
-              </Grid>
-              {/* <img src={logo} alt="Logo" /> */}
-              <Grid item xs={12}>
-                <DialogTitle
-                  style={{ cursor: "move" }}
-                  id="draggable-dialog-title"
-                >
-                  <Typography>
-                    <Box
-                      fontSize={32}
-                      fontWeight="fontWeightBold"
-                      lineHeight={0}
-                    >
-                      Success!
-                    </Box>
-                  </Typography>{" "}
-                </DialogTitle>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Typography>
-                  <Box
-                    fontSize={16}
-                    fontWeight="fontWeightRegular"
-                    lineHeight={2}
-                  >
-                    Your response was submitted successfully!
-                  </Box>
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12}>
-                <DialogActions>
-                  <div style={{ width: 120 }}>
-                    <Button
-                      autoFocus
-                      fullWidth={true}
-                      size="large"
-                      variant="contained"
-                      onClick={this.handleClose}
-                      color="primary"
-                    >
-                      ok
-                    </Button>
-                  </div>
-                </DialogActions>
-              </Grid>
+          {/* <div style={{ width: 600, height: 350 }}> */}
+          <Grid
+            container
+            direction="column"
+            wrap="no-wrap"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item xs={12}>
+              <CheckCircleOutlineIcon
+                style={{
+                  width: 200,
+                  height: 200
+                }}
+              />
             </Grid>
-          </div>
+            {/* <img src={logo} alt="Logo" /> */}
+            <Grid item xs={12}>
+              <DialogTitle
+                style={{ cursor: "move" }}
+                id="draggable-dialog-title"
+              >
+                <Typography>
+                  <Box fontSize={32} fontWeight="fontWeightBold" lineHeight={0}>
+                    Success!
+                  </Box>
+                </Typography>{" "}
+              </DialogTitle>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography>
+                <Box
+                  fontSize={16}
+                  fontWeight="fontWeightRegular"
+                  lineHeight={2}
+                >
+                  Your response was submitted successfully!
+                </Box>
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <DialogActions>
+                <div style={{ width: 120 }}>
+                  <Button
+                    autoFocus
+                    fullWidth={true}
+                    size="large"
+                    variant="contained"
+                    onClick={this.handleClose}
+                    color="primary"
+                  >
+                    ok
+                  </Button>
+                </div>
+              </DialogActions>
+            </Grid>
+          </Grid>
+          {/* </div> */}
         </Dialog>
       </div>
     );
