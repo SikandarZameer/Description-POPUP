@@ -8,11 +8,12 @@ import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import axios from "axios";
+// import axios from "axios";
 
 // const POST_API = "https://webhook.site/462bc21d-091e-4609-8ff5-172e205f4423";
 const POST_API_1 = "https://webhook.site/102097fa-bdd4-4074-8e0f-5508fad7b0d1";
-const POST_API_2 = "https://jsonplaceholder.typicode.com/posts";
+// const POST_API_2 = "https://jsonplaceholder.typicode.com/posts";
+
 function PaperComponent(props) {
   return (
     <Draggable
