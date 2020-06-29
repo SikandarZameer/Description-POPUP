@@ -7,7 +7,7 @@ import "./styles.css";
 export default function App() {
   return (
     <div className="App">
-      <Demo1 />
+      <Demo />
     </div>
   );
 }

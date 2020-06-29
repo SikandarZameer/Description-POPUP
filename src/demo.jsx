@@ -7,7 +7,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 // import axios from "axios";
 
 // const POST_API = "https://webhook.site/462bc21d-091e-4609-8ff5-172e205f4423";
@@ -146,23 +149,57 @@ export default class PendRejectDialog extends Component {
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
+          fullWidth="true"
+          maxWidth="sm"
           PaperComponent={PaperComponent}
           aria-labelledby="draggable-dialog-title"
         >
-          <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-            Patient MR Number: 6543213
-          </DialogTitle>
+          <Grid
+            container
+            direction="column"
+            wrap="no-wrap"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item xs={12}>
+              <DialogTitle>
+                <Typography>
+                  <Box fontSize={16} fontWeight="fontWeightBold" lineHeight={0}>
+                    Patient MR Number: 6543213
+                  </Box>
+                </Typography>
+              </DialogTitle>
+            </Grid>
+          </Grid>
+
           <DialogContent>
             <DialogContentText>
-              Time:
-              {this.state.time}
-              {"    "}
-              Date: {this.state.date}
+              <Typography>
+                <Box
+                  style={{ display: "inline-block" }}
+                  fontSize={10}
+                  fontWeight="fontWeightBold"
+                  lineHeight={0}
+                >
+                  Time:{this.state.time}
+                </Box>
+                <Box
+                  style={{ display: "inline-block", marginLeft: 8 }}
+                  fontSize={10}
+                  fontWeight="fontWeightBold"
+                  lineHeight={0}
+                >
+                  Date: {this.state.date}
+                </Box>
+              </Typography>
             </DialogContentText>
             <div style={{ width: "100%" }}>
               <TextField
-                style={{ width: "100%", margin: "4px" }}
+                style={{ width: "100%" }}
                 label=""
+                multiline
+                placeholder="Details"
+                rows={5}
                 variant="outlined"
                 id="mui-theme-provider-outlined-input"
                 fullwidth="true"
@@ -170,22 +207,47 @@ export default class PendRejectDialog extends Component {
               />
             </div>
           </DialogContent>
-          <DialogActions>
-            <Button
-              autoFocus
-              // onClick={() => this.handleAcceptPendReject("accept")}
-              onClick={this.handleAccept}
-              color="primary"
-            >
-              Accept
-            </Button>
-            <Button autoFocus onClick={this.handlePend} color="primary">
-              Append
-            </Button>
-            <Button onClick={this.handleReject} color="primary">
-              Reject
-            </Button>
-          </DialogActions>
+
+          <Grid
+            container
+            direction="column"
+            wrap="no-wrap"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item xs={12}>
+              <DialogActions>
+                <div style={{ width: 120, height: 50 }}>
+                  <Button
+                    variant="contained"
+                    // onClick={() => this.handleAcceptPendReject("accept")}
+                    onClick={this.handleAccept}
+                    color="primary"
+                  >
+                    Accept
+                  </Button>
+                </div>
+                <div style={{ width: 120, height: 50 }}>
+                  <Button
+                    variant="contained"
+                    onClick={this.handlePend}
+                    color="primary"
+                  >
+                    Append
+                  </Button>
+                </div>
+                <div style={{ width: 120, height: 50 }}>
+                  <Button
+                    variant="contained"
+                    onClick={this.handleReject}
+                    color="primary"
+                  >
+                    Reject
+                  </Button>
+                </div>
+              </DialogActions>
+            </Grid>
+          </Grid>
         </Dialog>
       </div>
     );
