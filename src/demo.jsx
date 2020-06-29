@@ -11,8 +11,8 @@ import Button from "@material-ui/core/Button";
 import axios from "axios";
 
 // const POST_API = "https://webhook.site/462bc21d-091e-4609-8ff5-172e205f4423";
-const POST_API = "https://webhook.site/102097fa-bdd4-4074-8e0f-5508fad7b0d1";
-
+const POST_API_1 = "https://webhook.site/102097fa-bdd4-4074-8e0f-5508fad7b0d1";
+const POST_API_2 = "https://jsonplaceholder.typicode.com/posts";
 function PaperComponent(props) {
   return (
     <Draggable
@@ -36,12 +36,8 @@ export default class PendRejectDialog extends Component {
         pend: null,
         reject: null
       },
-      time: new Date().toLocaleTimeString("en-US", {
-        hour12: true,
-        hour: "numeric",
-        minute: "numeric"
-      }),
-      date: new Date().toLocaleDateString()
+      time: "",
+      date: ""
     };
   }
 
@@ -85,47 +81,55 @@ export default class PendRejectDialog extends Component {
     this.handleAcceptPendReject("reject");
   };
   handleAcceptPendReject = name => {
-    this.setState({
-      open: false,
-      explanation: {
-        ...this.state.explanation,
-        [name]: this.state.description
-      }
-    });
-    this.postData();
+    this.setState(
+      st => ({
+        open: false,
+        explanation: {
+          ...st.explanation,
+          [name]: st.description
+        }
+      }),
+      this.postData
+    );
+    // this.postData();
   };
 
   postData = async () => {
-    await axios
-      .post("https://jsonplaceholder.typicode.com/posts", {
+    // await axios
+    //   .post(POST_API_2, {
+    //     time: this.state.time,
+    //     date: this.state.date,
+    //     description: this.state.description,
+    //     explanation: this.state.explanation
+    //   })
+    //   .then(response =>
+    //     response.status === 201
+    //       ? console.log(response.data)
+    //       : console.log("error")
+    //   );
+
+    await fetch(POST_API_1, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
         time: this.state.time,
         date: this.state.date,
         description: this.state.description,
         explanation: this.state.explanation
       })
-      .then(response => console.log(response.data));
-
-    // await fetch(POST_API, {
-    //   method: "POST",
-    //   mode: "no-cors",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify({
-    //     accept: this.state.explanation.accept,
-    //     pend: this.state.explanation.pend,
-    //     reject: this.state.explanation.reject
-    //   })
-    // }).then(res => {
-    //   if (res.status !== 200) {
-    //     console.log("error");
-    //   } else {
-    //     res.json().then(data => {
-    //       console.log(data);
-    //     });
-    //   }
-    // });
+    }).then(res => {
+      if (res.status !== 200) {
+        console.log(res.data);
+      } else {
+        res.json().then(data => {
+          console.log(data);
+        });
+      }
+    });
   };
 
   render() {
