@@ -1,14 +1,15 @@
 import React from "react";
 // import Demo from "./demo";
 // import Demo1 from "./ok";
-import Lastinal from "./final";
+// import Lastinal from "./final";
+import Notice from "./Components/Notifications";
 
 import "./styles.css";
 
 export default function App() {
   return (
     <div className="App">
-      <Lastinal />
+      <Notice />
     </div>
   );
 }

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import Draggable from "react-draggable";
 import { Paper, Button } from "@material-ui/core";
-// import Button from "@material-ui/core/Button";
-import Descriptionbody from "./Components/Descriptionbody";
-import Reasonbody from "./Components/Reasonbody";
-import Okbody from "./Components/OKbody";
-import Dialog from "./Components/Dialog";
+import Descriptionbody from "./Descriptionbody";
+import Reasonbody from "./Reasonbody";
+import Okbody from "./OKbody";
+import Dialog from "./Dialog";
 // import axios from "axios";
 
 // const POST_API = "https://webhook.site/462bc21d-091e-4609-8ff5-172e205f4423";
