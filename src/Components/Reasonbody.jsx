@@ -1,7 +1,6 @@
 import React from "react";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -22,7 +21,7 @@ const body = props => (
         <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
           <Typography>
             <Box fontSize={16} fontWeight="fontWeightBold" lineHeight={0}>
-              Patient MR Number: 6543213
+              Reason
             </Box>
           </Typography>
         </DialogTitle>
@@ -30,26 +29,6 @@ const body = props => (
     </Grid>
 
     <DialogContent>
-      <DialogContentText>
-        <Typography>
-          <Box
-            style={{ display: "inline-block" }}
-            fontSize={10}
-            fontWeight="fontWeightBold"
-            lineHeight={0}
-          >
-            Time:{props.time}
-          </Box>
-          <Box
-            style={{ display: "inline-block", marginLeft: 8 }}
-            fontSize={10}
-            fontWeight="fontWeightBold"
-            lineHeight={0}
-          >
-            Date: {props.date}
-          </Box>
-        </Typography>
-      </DialogContentText>
       <div style={{ width: "100%" }}>
         <TextField
           style={{ width: "100%" }}
@@ -60,7 +39,7 @@ const body = props => (
           variant="outlined"
           id="mui-theme-provider-outlined-input"
           fullwidth="true"
-          onChange={props.handleChange}
+          onChange={props.handleSubmitChange}
         />
       </div>
     </DialogContent>
@@ -74,32 +53,14 @@ const body = props => (
     >
       <Grid item xs={12}>
         <DialogActions>
-          <div style={{ width: 120, height: 50 }}>
+          <div style={{ width: 150, height: 50 }}>
             <Button
               variant="contained"
               // onClick={() => this.handleAcceptPendReject("accept")}
-              onClick={props.handleAccept}
+              onClick={props.handleSubmit}
               color="primary"
             >
-              Accept
-            </Button>
-          </div>
-          <div style={{ width: 120, height: 50 }}>
-            <Button
-              variant="contained"
-              onClick={props.handlePend}
-              color="primary"
-            >
-              Append
-            </Button>
-          </div>
-          <div style={{ width: 120, height: 50 }}>
-            <Button
-              variant="contained"
-              onClick={props.handleReject}
-              color="primary"
-            >
-              Reject
+              Submit
             </Button>
           </div>
         </DialogActions>
