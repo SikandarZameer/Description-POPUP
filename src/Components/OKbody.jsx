@@ -52,7 +52,7 @@ const body = props => (
               fullWidth={true}
               size="large"
               variant="contained"
-              onClick={this.handleClose}
+              onClick={props.handleClose}
               color="primary"
             >
               ok

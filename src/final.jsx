@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import Dialog from "@material-ui/core/Dialog";
 import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
 import Button from "@material-ui/core/Button";
 import Descriptionbody from "./Components/Descriptionbody";
 import Okbody from "./Components/OKbody";
+import Dialog from "./Components/Dialog";
+
 // import axios from "axios";
 
 // const POST_API = "https://webhook.site/462bc21d-091e-4609-8ff5-172e205f4423";
@@ -59,7 +60,8 @@ export default class PendRejectDialog extends Component {
 
   handleClose = () => {
     this.setState({
-      open: false
+      open: false,
+      openok: false
     });
   };
 
@@ -83,6 +85,7 @@ export default class PendRejectDialog extends Component {
     this.setState(
       st => ({
         open: false,
+        openok: true,
         explanation: {
           ...st.explanation,
           [name]: st.description
@@ -141,15 +144,12 @@ export default class PendRejectDialog extends Component {
         >
           Open form dialog
         </Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          fullWidth="true"
-          maxWidth="sm"
-          PaperComponent={PaperComponent}
-          aria-labelledby="draggable-dialog-title"
-        >
-          {this.state.open && (
+        {this.state.open && (
+          <Dialog
+            open={this.state.open}
+            handleClose={this.handleClose}
+            PaperComponent={PaperComponent}
+          >
             <Descriptionbody
               time={this.state.time}
               date={this.state.date}
@@ -158,8 +158,17 @@ export default class PendRejectDialog extends Component {
               handlePend={this.handlePend}
               handleReject={this.handleReject}
             />
-          )}
-        </Dialog>
+          </Dialog>
+        )}
+        {this.state.openok && (
+          <Dialog
+            open={this.state.openok}
+            handleClose={this.handleClose}
+            PaperComponent={PaperComponent}
+          >
+            <Okbody handleClose={this.handleClose} />
+          </Dialog>
+        )}
       </div>
     );
   }
