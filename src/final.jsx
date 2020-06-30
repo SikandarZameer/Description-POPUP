@@ -4,6 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
 import Button from "@material-ui/core/Button";
 import Descriptionbody from "./Components/Descriptionbody";
+import Okbody from "./Components/OKbody";
 // import axios from "axios";
 
 // const POST_API = "https://webhook.site/462bc21d-091e-4609-8ff5-172e205f4423";
@@ -27,6 +28,7 @@ export default class PendRejectDialog extends Component {
 
     this.state = {
       open: false,
+      openok: false,
       description: null,
       explanation: {
         accept: null,
