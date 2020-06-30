@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
-import Button from "@material-ui/core/Button";
+import { Paper, Button } from "@material-ui/core";
+// import Button from "@material-ui/core/Button";
 import Descriptionbody from "./Components/Descriptionbody";
 import Reasonbody from "./Components/Reasonbody";
 import Okbody from "./Components/OKbody";
@@ -10,7 +10,7 @@ import Dialog from "./Components/Dialog";
 
 // const POST_API = "https://webhook.site/462bc21d-091e-4609-8ff5-172e205f4423";
 const POST_API_1 = "https://webhook.site/102097fa-bdd4-4074-8e0f-5508fad7b0d1";
-// const POST_API_2 = "https://jsonplaceholder.typicode.com/posts";
+const POST_API_2 = "https://jsonplaceholder.typicode.com/posts";
 
 function PaperComponent(props) {
   return (
@@ -31,6 +31,7 @@ export default class PendRejectDialog extends Component {
       open: false,
       openreason: false,
       openok: false,
+      isLoaded: false,
       description: null,
       reason: null,
       explanation: {
@@ -43,7 +44,20 @@ export default class PendRejectDialog extends Component {
     };
   }
 
+  gettData = async () => {
+    await fetch(POST_API_2)
+      .then(res => res.json())
+      .then(json =>
+        this.setState({
+          isLoaded: true,
+          description: json[0].body
+        })
+      );
+  };
+
   handleClickOpen = () => {
+    this.gettData();
+
     this.setState({
       open: true,
       explanation: {
@@ -91,7 +105,7 @@ export default class PendRejectDialog extends Component {
       openreason: true,
       explanation: {
         ...st.explanation,
-        [name]: st.description
+        [name]: "true"
       }
     }));
   };
@@ -137,7 +151,6 @@ export default class PendRejectDialog extends Component {
       body: JSON.stringify({
         time: this.state.time,
         date: this.state.date,
-        description: this.state.description,
         explanation: this.state.explanation,
         reason: this.state.reason
       })
@@ -170,6 +183,7 @@ export default class PendRejectDialog extends Component {
           >
             <Descriptionbody
               time={this.state.time}
+              details={this.state.description}
               date={this.state.date}
               handleChange={this.handleChange}
               handleAccept={this.handleAccept}
