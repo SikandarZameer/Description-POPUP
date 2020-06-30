@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
 import Button from "@material-ui/core/Button";
 import Descriptionbody from "./Components/Descriptionbody";
+import Reasonbody from "./Components/Reasonbody";
 import Okbody from "./Components/OKbody";
 import Dialog from "./Components/Dialog";
 
@@ -29,8 +30,10 @@ export default class PendRejectDialog extends Component {
 
     this.state = {
       open: false,
+      openreason: false,
       openok: false,
       description: null,
+      reason: null,
       explanation: {
         accept: null,
         pend: null,
@@ -61,6 +64,7 @@ export default class PendRejectDialog extends Component {
   handleClose = () => {
     this.setState({
       open: false,
+      openreason: false,
       openok: false
     });
   };
@@ -81,15 +85,29 @@ export default class PendRejectDialog extends Component {
   handleReject = () => {
     this.handleAcceptPendReject("reject");
   };
+
   handleAcceptPendReject = name => {
+    this.setState(st => ({
+      open: false,
+      openreason: true,
+      explanation: {
+        ...st.explanation,
+        [name]: st.description
+      }
+    }));
+  };
+
+  handleSubmitChange = event => {
+    this.setState({
+      reason: event.target.value
+    });
+  };
+
+  handleSubmit = event => {
     this.setState(
       st => ({
-        open: false,
-        openok: true,
-        explanation: {
-          ...st.explanation,
-          [name]: st.description
-        }
+        openreason: false,
+        openok: true
       }),
       this.postData
     );
@@ -121,7 +139,8 @@ export default class PendRejectDialog extends Component {
         time: this.state.time,
         date: this.state.date,
         description: this.state.description,
-        explanation: this.state.explanation
+        explanation: this.state.explanation,
+        reason: this.state.reason
       })
     }).then(res => {
       if (res.status !== 200) {
@@ -157,6 +176,18 @@ export default class PendRejectDialog extends Component {
               handleAccept={this.handleAccept}
               handlePend={this.handlePend}
               handleReject={this.handleReject}
+            />
+          </Dialog>
+        )}
+        {this.state.openreason && (
+          <Dialog
+            open={this.state.openreason}
+            handleClose={this.handleClose}
+            PaperComponent={PaperComponent}
+          >
+            <Reasonbody
+              handleSubmitChange={this.handleSubmitChange}
+              handleSubmit={this.handleSubmit}
             />
           </Dialog>
         )}
