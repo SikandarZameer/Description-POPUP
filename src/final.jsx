@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Paper from "@material-ui/core/Paper";
 import Draggable from "react-draggable";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
-
+import Descriptionbody from "./Components/Descriptionbody";
 // import axios from "axios";
 
 // const POST_API = "https://webhook.site/462bc21d-091e-4609-8ff5-172e205f4423";
@@ -155,100 +147,16 @@ export default class PendRejectDialog extends Component {
           PaperComponent={PaperComponent}
           aria-labelledby="draggable-dialog-title"
         >
-          <Grid
-            container
-            direction="column"
-            wrap="no-wrap"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item xs={12}>
-              <DialogTitle>
-                <Typography>
-                  <Box fontSize={16} fontWeight="fontWeightBold" lineHeight={0}>
-                    Patient MR Number: 6543213
-                  </Box>
-                </Typography>
-              </DialogTitle>
-            </Grid>
-          </Grid>
-
-          <DialogContent>
-            <DialogContentText>
-              <Typography>
-                <Box
-                  style={{ display: "inline-block" }}
-                  fontSize={10}
-                  fontWeight="fontWeightBold"
-                  lineHeight={0}
-                >
-                  Time:{this.state.time}
-                </Box>
-                <Box
-                  style={{ display: "inline-block", marginLeft: 8 }}
-                  fontSize={10}
-                  fontWeight="fontWeightBold"
-                  lineHeight={0}
-                >
-                  Date: {this.state.date}
-                </Box>
-              </Typography>
-            </DialogContentText>
-            <div style={{ width: "100%" }}>
-              <TextField
-                style={{ width: "100%" }}
-                label=""
-                multiline
-                placeholder="Details"
-                rows={5}
-                variant="outlined"
-                id="mui-theme-provider-outlined-input"
-                fullwidth="true"
-                onChange={this.handleChange}
-              />
-            </div>
-          </DialogContent>
-
-          <Grid
-            container
-            direction="column"
-            wrap="no-wrap"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item xs={12}>
-              <DialogActions>
-                <div style={{ width: 120, height: 50 }}>
-                  <Button
-                    variant="contained"
-                    // onClick={() => this.handleAcceptPendReject("accept")}
-                    onClick={this.handleAccept}
-                    color="primary"
-                  >
-                    Accept
-                  </Button>
-                </div>
-                <div style={{ width: 120, height: 50 }}>
-                  <Button
-                    variant="contained"
-                    onClick={this.handlePend}
-                    color="primary"
-                  >
-                    Append
-                  </Button>
-                </div>
-                <div style={{ width: 120, height: 50 }}>
-                  <Button
-                    variant="contained"
-                    onClick={this.handleReject}
-                    color="primary"
-                  >
-                    Reject
-                  </Button>
-                </div>
-              </DialogActions>
-            </Grid>
-          </Grid>
+          {this.state.open && (
+            <Descriptionbody
+              time={this.state.time}
+              date={this.state.date}
+              handleChange={this.handleChange}
+              handleAccept={this.handleAccept}
+              handlePend={this.handlePend}
+              handleReject={this.handleReject}
+            />
+          )}
         </Dialog>
       </div>
     );
