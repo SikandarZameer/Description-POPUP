@@ -109,10 +109,3 @@ class NotificationMenu extends React.Component {
   }
 }
 export default NotificationMenu;
-
-// {
-//   this.state.data.map((row,index)=> (
-//    <TableRow style ={ index % 2? { background : "#fdffe0" }:{ background : "white" }}>
-//   ...
-//   </TableRow>
-//   ))}
