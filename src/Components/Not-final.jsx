@@ -27,6 +27,8 @@ class NotificationMenu extends React.Component {
     super(props);
     this.state = {
       anchorEl: null,
+      openMRS_no: null,
+      anomaly_id: null,
       anomalies: [],
       open: false,
       openreason: false,
@@ -85,12 +87,14 @@ class NotificationMenu extends React.Component {
       .catch(error => console.log(error));
   };
 
-  onItemClick = num => {
+  onItemClick = (num, id) => {
     this.getDetailsData();
 
     this.setState({
       open: true,
       anchorEl: null,
+      openMRS_no: num,
+      anomaly_id: id,
       explanation: {
         accept: "",
         pend: "",
@@ -104,6 +108,7 @@ class NotificationMenu extends React.Component {
       date: new Date().toLocaleDateString()
     });
     console.log(num);
+    console.log(id);
   };
 
   handleAccept = () => {
@@ -155,6 +160,8 @@ class NotificationMenu extends React.Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        openMRS_no: this.state.openMRS_no,
+        anomaly_id: this.state.anomaly_id,
         time: this.state.time,
         date: this.state.date,
         explanation: this.state.explanation,
@@ -174,7 +181,11 @@ class NotificationMenu extends React.Component {
   render() {
     const { anchorEl } = this.state;
     const anomalylist = this.state.anomalies.map(anomaly => (
-      <MenuItemWrapper onItemClick={this.onItemClick} id={anomaly.id}>
+      <MenuItemWrapper
+        onItemClick={this.onItemClick}
+        id={anomaly.id}
+        number={anomaly.userId}
+      >
         <Typography component="div">
           <Box
             textAlign="justify"
@@ -244,6 +255,7 @@ class NotificationMenu extends React.Component {
             PaperComponent={PaperComponent}
           >
             <Descriptionbody
+              num={this.state.openMRS_no}
               time={this.state.time}
               details={this.state.description}
               date={this.state.date}

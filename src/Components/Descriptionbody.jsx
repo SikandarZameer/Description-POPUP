@@ -22,7 +22,7 @@ const body = props => (
         <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
           <Typography>
             <Box fontSize={16} fontWeight="fontWeightBold" lineHeight={0}>
-              Patient MR Number: 6543213
+              Patient MR Number: {props.num}
             </Box>
           </Typography>
         </DialogTitle>

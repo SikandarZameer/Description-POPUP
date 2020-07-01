@@ -3,7 +3,7 @@ import { MenuItem } from "@material-ui/core";
 
 class MenuItemWrapper extends Component {
   handleClick = () => {
-    this.props.onItemClick(this.props.id);
+    this.props.onItemClick(this.props.id, this.props.number);
   };
   render() {
     const { id, children, ...others } = this.props;
