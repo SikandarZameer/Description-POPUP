@@ -55,12 +55,12 @@ const body = props => (
           style={{ width: "100%" }}
           label=""
           multiline
-          placeholder="Details"
+          value={props.details}
           rows={5}
           variant="outlined"
           id="mui-theme-provider-outlined-input"
           fullwidth="true"
-          onChange={props.handleChange}
+          // onChange={props.handleChange}
         />
       </div>
     </DialogContent>
