@@ -10,6 +10,7 @@ import Dialog from "./Dialog";
 // const POST_API = "https://webhook.site/462bc21d-091e-4609-8ff5-172e205f4423";
 const POST_API_1 = "https://webhook.site/102097fa-bdd4-4074-8e0f-5508fad7b0d1";
 const POST_API_2 = "https://jsonplaceholder.typicode.com/posts";
+// const POST_API_3 = "https://jsonplaceholder.typicode.com/users";
 
 function PaperComponent(props) {
   return (
@@ -43,7 +44,7 @@ export default class PendRejectDialog extends Component {
     };
   }
 
-  gettData = async () => {
+  getDetailsData = async () => {
     await fetch(POST_API_2)
       .then(res => res.json())
       .then(json =>
@@ -51,11 +52,12 @@ export default class PendRejectDialog extends Component {
           isLoaded: true,
           description: json[0].body
         })
-      );
+      )
+      .catch(error => console.log(error));
   };
 
   handleClickOpen = () => {
-    this.gettData();
+    this.getDetailsData();
 
     this.setState({
       open: true,

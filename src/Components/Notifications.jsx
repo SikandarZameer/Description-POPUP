@@ -2,10 +2,29 @@ import React from "react";
 import { Button, Box, Popover, Typography } from "@material-ui/core";
 import MenuItemWrapper from "./MenuItemWrapper";
 
+// const POST_API_3 = "https://jsonplaceholder.typicode.com/posts";
+
 class NotificationMenu extends React.Component {
-  state = {
-    anchorEl: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      anchorEl: null,
+      anomalies: []
+    };
+  }
+
+  async componentDidMount() {
+    await fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(res => res.json())
+      .then(data => this.setState({ anomalies: data }))
+      .catch(error => console.log(error));
+  }
+  // getDataFromApi = () => {
+  //   fetch("https://jsonplaceholder.typicode.com/posts")
+  //     .then(res => res.json())
+  //     .then(data => this.setState({ anomalies: data }))
+  //     .catch(error => console.log(error));
+  // };
 
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -16,11 +35,29 @@ class NotificationMenu extends React.Component {
   };
 
   onItemClick = num => {
-    console.log("onItemClick!");
+    this.setState({ anchorEl: null });
     console.log(num);
   };
+
   render() {
     const { anchorEl } = this.state;
+    const anomalylist = this.state.anomalies.map(anomaly => (
+      <MenuItemWrapper onItemClick={this.onItemClick} id={anomaly.id}>
+        <Typography component="div">
+          <Box
+            textAlign="justify"
+            m={0}
+            fontWeight="fontWeightBold"
+            fontSize="caption.fontSize"
+          >
+            Patient MR Number :{anomaly.id}
+          </Box>
+          <Box textAlign="left" m={0} lineHeight={1} fontSize={11}>
+            1 Anomaly Detected
+          </Box>
+        </Typography>
+      </MenuItemWrapper>
+    ));
     // const { classes } = this.props;
     return (
       <div>
@@ -65,56 +102,7 @@ class NotificationMenu extends React.Component {
               Anomaly Notifications
             </Box>
           </Typography>
-          {/* value={12} remove={this.remove} */}
-          <MenuItemWrapper onItemClick={this.onItemClick} id={1}>
-            <Typography component="div">
-              <Box
-                textAlign="justify"
-                m={0}
-                fontWeight="fontWeightBold"
-                fontSize="caption.fontSize"
-              >
-                Patient MR Number : 136587
-              </Box>
-              <Box textAlign="left" m={0} lineHeight={1} fontSize={11}>
-                1 Anomaly Detected
-              </Box>
-            </Typography>
-          </MenuItemWrapper>
-
-          {/* <MenuItem onClick={() => this.onItemClick(1)}>
-            <Typography component="div">
-              <Box
-                textAlign="justify"
-                m={0}
-                fontWeight="fontWeightBold"
-                fontSize="caption.fontSize"
-              >
-                Patient MR Number : 136587
-              </Box>
-              <Box textAlign="left" m={0} lineHeight={1} fontSize={11}>
-                1 Anomaly Detected
-              </Box>
-            </Typography>
-          </MenuItem> */}
-          {/* <MenuItem
-            onClick={this.handleClose}
-            style={{ backgroundColor: "lightgrey" }}
-          >
-            <Typography component="div">
-              <Box
-                textAlign="justify"
-                m={0}
-                fontWeight="fontWeightBold"
-                fontSize="caption.fontSize"
-              >
-                Patient MR Number : 136587
-              </Box>
-              <Box textAlign="left" m={0} lineHeight={1} fontSize={11}>
-                1 Anomaly Detected
-              </Box>
-            </Typography>
-          </MenuItem> */}
+          {anomalylist}
         </Popover>
       </div>
     );
